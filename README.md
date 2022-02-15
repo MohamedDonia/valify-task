@@ -50,4 +50,27 @@ We performed training with the following specs:
 - Applying early stopping criteria to stop training in case of validation loss not imporoved.
 - using AdamW optimizer which improves Adam’s generalization performance, allowing it to competewith SGD with momentum on image classification datasets.
 
+After running training script for the 5 folds with 10 epochs every fold using early stopping callback, we getthe following results for both training and validation:
 
+Fold | #1 | #2 | #3 | #4 | #5 | CV
+--- | --- | --- | --- |--- |--- |---
+Validation | 0.99982 | 1 | 0.99982 | 0.9997 | 0.9998 | 0.9998
+
+## Reduce Model Architecture
+### MobileNetV2
+
+After  training  model  with  ResNet18  and  get  CV  accuracy  0.9998  ,  we  can  reduce  network  size  to  getsmall  model  and  keep  a  high  accuracy.   The  MobileNetV2  architecture  is  based  on  an  inverted  residualstructure where the input and output of the residual block are thin bottleneck layers opposite to traditionalresidual models which use expanded representations in the input an MobileNetV2 uses lightweight depthwiseconvolutions to filter features in the intermediate expansion layer.
+
+After running model with the same configurations of ResNet18 but with only 1 fold , we find that the theaccuracy remains the same with lower learning rate but with a greet reduction in model size and less floatingpoint operations per second (FLOPS). We find the loss and accuracy over training and validation data areplotted in the following 2 figures, we found that the accuracy nearly 0.995228
+
+### queezeNet 1.0
+
+After training model with ResNet18 and get CV accuracy 0.9998 and training MobileNetV2 with 0.9952 val-idation accuracy, we will reduce model further to maintain same accuracy with very tiny model.  SqueezeNetachieves AlexNet-level accuracy on ImageNet with 50x fewer parameters [1].  with only 3 Mb we can achieve0.994 accuracy in validation, although we changed some parameters to get this results, we increased max-imum learning rate to 1E-4 in our scheduler and increased number of epochs to 20, maintaining all otherhyper parameters the same including augmentation parameters.
+
+Comparing 3 models performs from the view of model size,  accuracy and FLOPS and inference time areshown in the following table
+
+Model | CV | Modelsize (Mb) | Parameters | FLOPS | Speed(ms)
+--- | --- | --- | --- |--- |---
+Validation | 0.99983 | 44.8 | 11,191,389 | 1.826 GFLOPS | 4.693
+Validation | 0.99522 | 9.3 | 2,261,021 | 332.98 MFLOPS | 11.232
+Validation | 0.9941 | 3 | 750,301 | 724.9 MFLOPS | 4.53
