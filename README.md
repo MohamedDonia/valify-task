@@ -1,5 +1,6 @@
 # Sign Language Classifier
 
+
 With sign language, we can provide a way of communication without the use of voice.  This is very 
 importantfor individuals who have impaired hearing and inability speaking because it provides them 
 an alternativemeans of communicating with other people.  Furthermore, sign language is an universal 
