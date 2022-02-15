@@ -15,4 +15,4 @@ compareresults, perform cross validation and deploy model to put into production
 ## Dataset
 
 The  dataset  used  was  based  on  the  American  Finger  Spelling  format. 
-![alt text](https://github.com/MohamedDonia/valify-task/blob/main/assets/hand-pose-alphabet.jpg?raw=true)
+![alt text](https://github.com/MohamedDonia/valify-task/blob/main/assets/hand-pose-alphabet.jpg?raw=true =100x100)
